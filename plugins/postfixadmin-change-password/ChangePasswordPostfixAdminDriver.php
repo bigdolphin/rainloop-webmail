@@ -259,6 +259,9 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 		switch ($this->sEncrypt)
 		{
 			default:
+			case 'argon2i':
+				$sResult = "{ARGON2I}".password_hash($sPassword, PASSWORD_ARGON2I,["memory_cost" => 32768]);
+				break;
 			case 'cleartext':
 				$sResult = $sPassword;
 				break;
